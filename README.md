@@ -3,9 +3,10 @@
 Instead of using alert() for your XSS payloads, I encourage you to check out some XSS payloads which have purpose and hammer home a point.
 + **TLDR:** *POC||GTFO*
 
-Quick-nav  
-[Fetch](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
-[.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
+### **Quick-navigation:**
++ Exfiltration:  
+  + [Fetch](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
+  + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
 
 
 # EXFILTRATION
