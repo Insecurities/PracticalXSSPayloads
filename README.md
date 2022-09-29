@@ -4,7 +4,7 @@ Originally this started as just a little list of PoC payloads but it has now exp
 
 ### **Quick-navigation:**
 + **EXFILTRATION:**  
-  + [FETCH](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
+  + [FETCH](#fetch)  
   + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
 + **FORCING ACTIONS:**
   + [CLICK](https://github.com/Insecurities/PracticalXSSPayloads#forcing-actions)
