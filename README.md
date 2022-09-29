@@ -7,7 +7,7 @@ Originally this started as just a little list of PoC payloads but it has now exp
   + [FETCH](#fetch)  
   + [.$GET](#jquery-ajax)
 + **FORCING ACTIONS:**
-  + [CLICK](#forcing-actions)
+  + [CLICK](#-forcing-actions)
 + **SETTING ITEMS:**
   + [DOCUMENT.COOKIE](#via-documentcookie)
   + [WINDOW.LOCALSTORAGE](#via-windowlocalstorage)
