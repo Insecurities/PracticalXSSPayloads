@@ -5,20 +5,20 @@ Originally this started as just a little list of PoC payloads but it has now exp
 ### **Quick-navigation:**
 + **EXFILTRATION:**  
   + [FETCH](#fetch)  
-  + [.$GET](https://github.com/Insecurities/PracticalXSSPayloads#jquery-ajax)
+  + [.$GET](#jquery-ajax)
 + **FORCING ACTIONS:**
-  + [CLICK](https://github.com/Insecurities/PracticalXSSPayloads#forcing-actions)
+  + [CLICK](#forcing-actions)
 + **SETTING ITEMS:**
-  + [DOCUMENT.COOKIE](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#via-documentcookie)
-  + [WINDOW.LOCALSTORAGE](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#via-windowlocalstorage)
+  + [DOCUMENT.COOKIE](#via-documentcookie)
+  + [WINDOW.LOCALSTORAGE](#via-windowlocalstorage)
 + **EVENT ATTRIBUTES:**
-  + [ONLOAD](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onload)
-  + [ONERROR](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onerror)
-  + [ONMOUSEOVER](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onmouseover)
-  + [ONSELECT](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onselect)
-  + [ONKEY/UP/DOWN/PRESS](https://github.com/Insecurities/PracticalXSSPayloads/edit/main/README.md#onkeyupdownpress)
+  + [ONLOAD](#onload)
+  + [ONERROR](#onerror)
+  + [ONMOUSEOVER](#onmouseover)
+  + [ONSELECT](#onselect)
+  + [ONKEY/UP/DOWN/PRESS](#onkeyupdownpress)
 + **ANGULAR NOTE**
-  + [PAYLOADS FOR ANGULAR](https://github.com/Insecurities/PracticalXSSPayloads#angular)
+  + [PAYLOADS FOR ANGULAR](#angular)
 
 # 👁️‍🗨️ EXFILTRATION
 *For session hijacking, sensitive info exfil, etc.*
